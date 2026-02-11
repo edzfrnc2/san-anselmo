@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"> <meta name="description" content="San Anselmo Publications - Preserving the Filipino Intellect through independent publishing.">
-    <meta name="theme-color" content="#4a148c"> <title>San Anselmo Publications</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="San Anselmo Publications - Preserving the Filipino Intellect through independent publishing.">
+    <meta name="theme-color" content="#4a148c">
+    <title>San Anselmo Publications</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,7 +32,7 @@
             --sidebar-width: 280px;
             --collapsed-width: 90px;
             --icon-size: 24px;
-            --focus-ring: 2px solid var(--purple); /* Accessibility Focus */
+            --focus-ring: 2px solid var(--purple);
             --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
@@ -51,9 +53,14 @@
             --badge-text: #ddd;
         }
 
-        /* --- 2. GLOBAL ACCESSIBILITY & RESET --- */
+        /* --- 2. GLOBAL RESET --- */
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        *:focus-visible { outline: var(--focus-ring); outline-offset: 2px; } /* Keyboard Focus */
+        
+        /* FIX #2: REMOVED OUTLINE ON SEARCH INPUT SPECIFICALLY */
+        .search-bar input:focus { outline: none; box-shadow: none; }
+        
+        /* General Focus for Accessibility (excluding search bar internal) */
+        *:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
         
         body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg-body); height: 100vh; display: flex; justify-content: center; align-items: center; color: var(--text-main); font-weight: 300; transition: background 0.3s ease, color 0.3s ease; }
         
@@ -83,7 +90,6 @@
             position: relative;
         }
         
-        /* Collapsed State Logic */
         .sidebar.collapsed { width: var(--collapsed-width); padding: 30px 10px; }
 
         .logo-text-group, .nav-text, .admin-text-wrapper {
@@ -101,7 +107,6 @@
 
         .footer-expanded { display: block; opacity: 1; transition: opacity 0.3s; }
         .footer-collapsed { display: none; opacity: 0; transition: opacity 0.3s; justify-content: center; position: relative; }
-        
         .sidebar.collapsed .footer-expanded { display: none; opacity: 0; }
         .sidebar.collapsed .footer-collapsed { display: flex; opacity: 1; }
 
@@ -111,9 +116,7 @@
         .toggle-btn { background: none; border: none; cursor: pointer; color: var(--text-muted); transition: 0.3s; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; }
         .toggle-btn:hover { color: var(--purple); }
 
-        /* SEMANTIC NAV */
         .nav-menu { flex: 1; overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column; gap: 5px; }
-        /* Changed from div to button for accessibility */
         .nav-item { 
             width: 100%; border: none; background: none; text-align: left;
             padding: 12px 15px; border-radius: 10px; cursor: pointer; 
@@ -183,7 +186,7 @@
         .genre-tag { font-size: 0.8rem; padding: 8px 18px; border-radius: 30px; background: var(--bg-card); border: 1px solid var(--border); color: var(--text-muted); cursor: pointer; transition: 0.2s; font-weight: 500; }
         .genre-tag:hover, .genre-tag.active { background: var(--purple); color: white; border-color: var(--purple); transform: translateY(-2px); }
 
-        /* SHELVES (Fixed to prevent CLS and Scrolling) */
+        /* SHELVES */
         .shelf { 
             display: flex; gap: 30px; flex-wrap: wrap; 
             padding-bottom: 20px; border-bottom: 12px solid var(--wood-light); 
@@ -199,7 +202,7 @@
         .book-cover img { width: 100%; height: 100%; object-fit: cover; }
         .book-title { font-size: 0.85rem; font-weight: 600; margin-top: 10px; line-height: 1.3; color: var(--text-main); }
 
-        /* AUTHOR & TEAM - UNIFIED */
+        /* AUTHOR & TEAM */
         .author-card, .team-card { display: flex; align-items: center; justify-content: space-between; padding: 25px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; cursor: pointer; transition: 0.2s; }
         .author-card:hover, .team-card:hover { border-color: var(--purple); box-shadow: var(--shadow); transform: translateY(-3px); }
         .author-photo, .team-avatar { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid var(--bg-body); flex-shrink: 0; background: #eee; overflow: hidden; }
@@ -227,8 +230,8 @@
         .event-btn:hover { border-color: var(--purple); color: var(--purple); }
         .event-btn.active { background: var(--purple); color: white; border-color: var(--purple); }
         
-        /* Custom Select Accessible */
-        .custom-select-wrapper { position: relative; margin-left: auto; width: 160px; }
+        /* FIX #3: CUSTOM DROPDOWN STYLING */
+        .custom-select-wrapper { position: relative; margin-left: auto; width: 100%; margin-bottom: 15px; }
         .custom-select-trigger { padding: 8px 15px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg-input); color: var(--text-main); cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 0.9rem; justify-content: space-between; }
         .custom-options { display: none; position: absolute; top: 110%; right: 0; width: 100%; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; box-shadow: var(--shadow); z-index: 50; overflow: hidden; }
         .custom-options.open { display: block; animation: popIn 0.2s; }
@@ -270,7 +273,9 @@
         .btn-buy:hover { transform: translateY(-2px); opacity: 0.9; }
 
         .am-header { display: flex; align-items: center; gap: 30px; margin-bottom: 30px; }
-        
+        .am-photo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid var(--bg-input); flex-shrink: 0; }
+        .am-books { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 15px; }
+
         /* MOBILE RESPONSIVE */
         .mobile-header { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 60px; background: var(--bg-sidebar); border-bottom: 1px solid var(--border); z-index: 900; align-items: center; justify-content: space-between; padding: 0 20px; }
         .sidebar-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 800; transition: opacity 0.3s; }
@@ -346,7 +351,7 @@
             <div class="nav-menu">
                 <button class="nav-item active" onclick="showSection('home')">
                     <svg class="icon" viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9h-4v4h-2v-4H9V9h4V5h2v4h4v2z"/></svg>
-                    <span class="nav-text">Our Catalog</span>
+                    <span class="nav-text">Our Books</span>
                 </button>
                 <button class="nav-item" onclick="showSection('about')">
                     <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
@@ -415,7 +420,7 @@
         <main class="main-content" onscroll="checkScroll()">
             
             <section id="home" class="content-section active">
-                <h1 class="page-title" style="margin-bottom:20px;">Our Catalog</h1>
+                <h1 class="page-title" style="margin-bottom:20px;">Our Books</h1>
                 
                 <div class="search-container">
                     <div class="search-wrapper">
@@ -432,10 +437,16 @@
                     </div>
                     <div id="filterDropdown" class="filter-dropdown">
                         <h4 style="margin:0 0 15px 0; color:var(--purple);">Refine Search</h4>
-                        <label style="font-size:0.8rem; font-weight:600; color:var(--text-muted);">Year Published</label>
-                        <select id="yearFilter" onchange="applyFilters()" style="width:100%; padding:8px; border-radius:6px; border:1px solid var(--border); margin-bottom:15px; background:var(--bg-input); color:var(--text-main);">
-                            <option value="All">All Years</option>
-                        </select>
+                        <div class="custom-select-wrapper" style="width: 100%; margin-bottom: 15px;">
+                            <label style="font-size:0.8rem; font-weight:600; color:var(--text-muted); display:block; margin-bottom:5px;">Year Published</label>
+                            <div class="custom-select-trigger" onclick="toggleYearDropdown()" tabindex="0" onkeydown="if(event.key === 'Enter') toggleYearDropdown()">
+                                <span id="currentYear">All Years</span>
+                                <svg class="icon" style="width:14px; height:14px;" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                            </div>
+                            <div class="custom-options" id="yearOptions">
+                                </div>
+                        </div>
+
                         <label style="font-size:0.8rem; font-weight:600; color:var(--text-muted);">Price Range</label>
                         <div style="display:flex; gap:10px;">
                             <input type="number" id="minPrice" placeholder="Min" onkeyup="applyFilters()" style="width:100%; padding:8px; border-radius:6px; border:1px solid var(--border); background:var(--bg-input); color:var(--text-main);">
@@ -490,15 +501,15 @@
                             <button class="event-btn" onclick="filterEvents('past', this)">Past</button>
                         </div>
                         <div class="custom-select-wrapper" style="position:relative;">
-                            <div class="custom-select-trigger" tabindex="0" onclick="toggleEventDropdown()" onkeydown="if(event.key === 'Enter') toggleEventDropdown()">
+                            <div class="custom-select-trigger" onclick="toggleEventDropdown()">
                                 <span id="currentEventType">All Types</span>
                                 <svg class="icon" style="width:16px; height:16px;" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
                             </div>
                             <div class="custom-options" id="eventOptions">
-                                <div class="custom-option" tabindex="0" onclick="selectEventType('All')" onkeydown="if(event.key === 'Enter') selectEventType('All')">All Types</div>
-                                <div class="custom-option" tabindex="0" onclick="selectEventType('Book Fair')" onkeydown="if(event.key === 'Enter') selectEventType('Book Fair')">Book Fair</div>
-                                <div class="custom-option" tabindex="0" onclick="selectEventType('Outreach')" onkeydown="if(event.key === 'Enter') selectEventType('Outreach')">Outreach</div>
-                                <div class="custom-option" tabindex="0" onclick="selectEventType('Launch')" onkeydown="if(event.key === 'Enter') selectEventType('Launch')">Launch</div>
+                                <div class="custom-option" onclick="selectEventType('All')">All Types</div>
+                                <div class="custom-option" onclick="selectEventType('Book Fair')">Book Fair</div>
+                                <div class="custom-option" onclick="selectEventType('Outreach')">Outreach</div>
+                                <div class="custom-option" onclick="selectEventType('Launch')">Launch</div>
                             </div>
                         </div>
                     </div>
@@ -559,7 +570,7 @@
                     <div class="address-box">
                         <div class="address-text">
                             <strong>Office Address:</strong><br>
-                            Room 301 GRACE Building, Ortigas Avenue,<br>Greenhills, San Juan City
+                            Room 301 GRACE Building, Ortigas Avenue, Greenhills, San Juan City
                         </div>
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3860.9557457227806!2d121.04377847408036!3d14.601596877054332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b775717390b9%3A0xa017feff3ab492e2!2sGrace%20Building!5e0!3m2!1sen!2sph!4v1770734618186!5m2!1sen!2sph" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     </div>
@@ -616,7 +627,8 @@
             <div class="close-btn" onclick="document.getElementById('loginModal').style.display='none'" style="background:#333; border-color:#444; color:white;">×</div>
             <h3 style="display:flex; align-items:center; justify-content:center;"><svg class="icon" style="margin-right:10px; fill:var(--purple);" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>Authorized Access Only</h3>
             <p style="color:#888; font-size:0.85rem; margin-bottom:20px;">Secure Gateway for San Anselmo Staff</p>
-            <button class="btn-buy" style="width:100%; justify-content:center; margin-top:10px; background:linear-gradient(90deg, #4a148c, #7b1fa2); border:none;" onclick="login()">Authenticate with Provider</button>
+            <input type="password" id="adminPass" placeholder="Enter Secure Key" style="width:100%; padding:12px; margin:15px 0; background:#333; border:1px solid #444; color:white; border-radius:8px;">
+            <button class="btn-buy" style="width:100%; justify-content:center; margin-top:10px; background:linear-gradient(90deg, #4a148c, #7b1fa2); border:none;" onclick="login()">Authenticate</button>
         </div>
     </div>
 
@@ -665,32 +677,16 @@
         ];
 
         let currentEventFilter = 'upcoming';
+        let currentYearFilter = 'All';
 
         // --- GLOBAL INTERACTIONS ---
-        // History API Integration for SPA Routing
-        function updateURL(sectionId) {
-            const state = { section: sectionId };
-            const title = `San Anselmo - ${sectionId.charAt(0).toUpperCase() + sectionId.slice(1)}`;
-            const url = `#${sectionId}`;
-            history.pushState(state, title, url);
-            document.title = title;
-        }
-
-        window.onpopstate = function(event) {
-            if (event.state && event.state.section) {
-                showSection(event.state.section, false);
-            } else {
-                showSection('home', false);
-            }
-        };
-
         window.toggleSidebar = () => {
-            const sidebar = document.querySelector('.sidebar');
+            document.querySelector('.sidebar').classList.toggle('active');
             const overlay = document.querySelector('.sidebar-overlay');
-            sidebar.classList.toggle('active');
             overlay.classList.toggle('active');
             
-            if (sidebar.classList.contains('active')) {
+            // Scroll Lock
+            if (document.querySelector('.sidebar').classList.contains('active')) {
                 document.body.classList.add('no-scroll');
             } else {
                 document.body.classList.remove('no-scroll');
@@ -716,6 +712,7 @@
             }
             if (!event.target.closest('.custom-select-wrapper')) {
                 document.getElementById('eventOptions').classList.remove('open');
+                document.getElementById('yearOptions').classList.remove('open');
             }
         };
 
@@ -743,8 +740,8 @@
                 let html = `<div class="shelf-section"><div class="shelf-label">Featured</div><div class="shelf">`;
                 featuredBooks.forEach(b => {
                     html += `
-                        <div class="book" onclick="viewBook('${b.id}')" tabindex="0" onkeydown="if(event.key === 'Enter') viewBook('${b.id}')">
-                            <div class="book-cover"><img src="${b.img}" loading="lazy" width="140" height="210" alt="${b.title} cover"></div>
+                        <div class="book" onclick="viewBook('${b.id}')">
+                            <div class="book-cover"><img src="${b.img}" onerror="this.src='https://via.placeholder.com/140x210?text=${b.title.substring(0,8)}'"></div>
                             <div class="book-title">${b.title}</div>
                         </div>`;
                 });
@@ -758,8 +755,8 @@
                 let html = `<div class="shelf-section"><div class="shelf-label">Latest Releases</div><div class="shelf">`;
                 latestBooks.forEach(b => {
                     html += `
-                        <div class="book" onclick="viewBook('${b.id}')" tabindex="0" onkeydown="if(event.key === 'Enter') viewBook('${b.id}')">
-                            <div class="book-cover"><img src="${b.img}" loading="lazy" width="140" height="210" alt="${b.title} cover"></div>
+                        <div class="book" onclick="viewBook('${b.id}')">
+                            <div class="book-cover"><img src="${b.img}" onerror="this.src='https://via.placeholder.com/140x210?text=${b.title.substring(0,8)}'"></div>
                             <div class="book-title">${b.title}</div>
                         </div>`;
                 });
@@ -774,8 +771,8 @@
                 let html = `<div class="shelf-section"><div class="shelf-label">${cat}</div><div class="shelf">`;
                 shelfBooks.forEach(b => {
                     html += `
-                        <div class="book" onclick="viewBook('${b.id}')" tabindex="0" onkeydown="if(event.key === 'Enter') viewBook('${b.id}')">
-                            <div class="book-cover"><img src="${b.img}" loading="lazy" width="140" height="210" alt="${b.title} cover"></div>
+                        <div class="book" onclick="viewBook('${b.id}')">
+                            <div class="book-cover"><img src="${b.img}" onerror="this.src='https://via.placeholder.com/140x210?text=${b.title.substring(0,8)}'"></div>
                             <div class="book-title">${b.title}</div>
                         </div>`;
                 });
@@ -788,15 +785,13 @@
             document.getElementById('authorListContainer').innerHTML = AUTHORS.map(a => {
                 const count = BOOKS.filter(b => b.author.includes(a.name)).length;
                 return `
-                <div class="author-card" onclick="openAuthorModal('${a.name}')" tabindex="0" onkeydown="if(event.key === 'Enter') openAuthorModal('${a.name}')">
+                <div class="author-card" onclick="openAuthorModal('${a.name}')">
                     <div class="author-info">
                         <h3 style="color:var(--purple); margin:0;">${a.name}</h3>
                         <p style="color:var(--text-muted); font-size:0.9rem;">${a.bio}</p>
                         <small style="color:var(--accent); font-weight:600;">${count} Book${count !== 1 ? 's' : ''}</small>
                     </div>
-                    <div class="author-photo">
-                        <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(a.name)}&background=random&color=fff&size=128" width="90" height="90" alt="${a.name}" loading="lazy">
-                    </div>
+                    <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(a.name)}&background=random&color=fff&size=128" class="author-photo">
                 </div>`;
             }).join('');
         }
@@ -804,8 +799,8 @@
         function renderTeam() {
             document.getElementById('teamGrid').innerHTML = TEAM.map(m => `
                 <div class="team-card">
-                    <div class="team-avatar">
-                        <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(m.name)}&background=random&color=fff&size=128" width="90" height="90" alt="${m.name}" loading="lazy">
+                    <div class="team-avatar" style="overflow:hidden;">
+                        <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(m.name)}&background=random&color=fff&size=128" style="width:100%; height:100%; object-fit:cover;">
                     </div>
                     <div style="flex:1;">
                         <h4 style="margin:0; color:var(--purple);">${m.name}</h4>
@@ -837,7 +832,7 @@
             }
 
             container.innerHTML = filteredEvents.map(e => `
-                <div class="event-card" tabindex="0">
+                <div class="event-card">
                     <div class="event-date">
                         <span style="font-size:1.5rem; font-weight:700;">${new Date(e.date).getDate()}</span>
                         <span>${new Date(e.date).toLocaleString('default', { month: 'short' })}</span>
@@ -848,7 +843,7 @@
                         <h3 style="margin:8px 0; color:var(--purple);">${e.title}</h3>
                         <p style="color:var(--text-muted); font-size:0.9rem;">${e.location}</p>
                     </div>
-                    <iframe class="event-map" src="${e.map}" allowfullscreen="" loading="lazy" title="${e.title} Map"></iframe>
+                    <iframe class="event-map" src="${e.map}" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             `).join('');
         }
@@ -870,6 +865,7 @@
         window.filterEvents = (timeFilter, btn) => {
             if(timeFilter) {
                 currentEventFilter = timeFilter;
+                // Only select buttons within the filter group to avoid conflict with main tabs
                 const group = btn.parentElement;
                 group.querySelectorAll('.event-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
@@ -877,10 +873,19 @@
             renderEvents();
         };
 
+        // Custom Event Dropdown Logic
         window.toggleEventDropdown = () => document.getElementById('eventOptions').classList.toggle('open');
         window.selectEventType = (type) => {
             document.getElementById('currentEventType').innerText = type === 'All' ? 'All Types' : type;
             renderEvents();
+        };
+        
+        // Custom Year Dropdown Logic
+        window.toggleYearDropdown = () => document.getElementById('yearOptions').classList.toggle('open');
+        window.selectYear = (year) => {
+            currentYearFilter = year;
+            document.getElementById('currentYear').innerText = year === 'All' ? 'All Years' : year;
+            applyFilters();
         };
 
         window.openAuthorModal = (name) => {
@@ -934,8 +939,7 @@
                 document.getElementById('searchInput').value = '';
                 filterByGenre(book.category);
             } else if (type === 'year') {
-                document.getElementById('yearFilter').value = book.year;
-                applyFilters();
+                selectYear(book.year.toString());
             }
         };
 
@@ -965,7 +969,7 @@
 
         window.applyFilters = () => {
             const term = document.getElementById('searchInput').value.toLowerCase();
-            const year = document.getElementById('yearFilter').value;
+            const year = currentYearFilter;
             const min = document.getElementById('minPrice').value;
             const max = document.getElementById('maxPrice').value;
             
@@ -984,7 +988,8 @@
         };
 
         window.resetFilters = () => {
-            document.getElementById('yearFilter').value = 'All';
+            currentYearFilter = 'All';
+            document.getElementById('currentYear').innerText = 'All Years';
             document.getElementById('minPrice').value = '';
             document.getElementById('maxPrice').value = '';
             document.querySelectorAll('.genre-tag').forEach(t => t.classList.remove('active'));
@@ -1000,7 +1005,7 @@
             applyFilters(); 
         };
 
-        window.showSection = (id, pushState = true) => {
+        window.showSection = (id) => {
             document.querySelectorAll('.content-section').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
             document.getElementById(id).classList.add('active');
@@ -1020,39 +1025,28 @@
                 document.body.classList.remove('no-scroll');
             }
             window.scrollTo(0,0);
-            
-            if(pushState) updateURL(id);
-        };
-
-        window.openLoginModal = (e) => {
-            e.preventDefault();
-            document.getElementById('loginModal').style.display = 'flex';
         };
 
         window.login = () => {
-             // Mock secure login flow
-             console.log("Redirecting to OAuth provider...");
-             alert("Redirecting to Secure Dashboard...");
-             document.getElementById('loginModal').style.display = 'none';
+             if(document.getElementById('adminPass').value === 'admin') {
+                document.getElementById('loginModal').style.display = 'none';
+                alert("Access Granted. Redirecting to Secure Dashboard..."); 
+            } else { alert("Access Denied."); }
         };
 
-        // HANDLE DEEP LINKING ON LOAD
-        document.addEventListener('DOMContentLoaded', () => {
-             const hash = window.location.hash.substring(1);
-             if (hash) showSection(hash, false);
-             
-             // Initialize Filters
-             const years = [...new Set(BOOKS.map(b => b.year))].sort().reverse();
-             document.getElementById('yearFilter').innerHTML += years.map(y => `<option value="${y}">${y}</option>`).join('');
-             
-             const genres = ["All", ...new Set(BOOKS.map(b => b.category))];
-             document.getElementById('genreCloud').innerHTML = genres.map(g => `<div class="genre-tag ${g==='All'?'active':''}" onclick="filterByGenre('${g}')">${g}</div>`).join('');
+        // INIT
+        const years = [...new Set(BOOKS.map(b => b.year))].sort().reverse();
+        const yearOptionsContainer = document.getElementById('yearOptions');
+        yearOptionsContainer.innerHTML = `<div class="custom-option" onclick="selectYear('All')">All Years</div>` + 
+            years.map(y => `<div class="custom-option" onclick="selectYear('${y}')">${y}</div>`).join('');
+        
+        const genres = ["All", ...new Set(BOOKS.map(b => b.category))];
+        document.getElementById('genreCloud').innerHTML = genres.map(g => `<div class="genre-tag ${g==='All'?'active':''}" onclick="filterByGenre('${g}')">${g}</div>`).join('');
 
-             renderLibrary(BOOKS);
-             renderAuthors();
-             renderTeam();
-             renderEvents();
-        });
+        renderLibrary(BOOKS);
+        renderAuthors();
+        renderTeam();
+        renderEvents();
 
     </script>
 </body>
