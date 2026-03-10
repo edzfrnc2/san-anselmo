@@ -479,21 +479,136 @@
       .main-content{height:auto;overflow:visible}
       .section-inner{padding:1.5rem 1rem}
     }
+
+    /* ---- 600 px ---- */
     @media(max-width:600px){
-      .topbar-search input{width:120px}
+      /* Topbar */
+      .topbar{padding:0 .75rem;gap:.5rem}
+      .topbar-search input{width:110px}
+      .topbar-center-name{font-size:.82rem}
+
+      /* Search predictions — keep inside screen */
+      .search-predictions{left:auto;right:-1px;min-width:260px}
+
+      /* Filter dropdown — full-width, never clip off screen */
+      .filter-dropdown{left:auto;right:0;width:260px}
+
+      /* Section inner tighter */
+      .section-inner{padding:1.2rem .9rem}
+
+      /* Page headers */
+      .page-header{margin-bottom:1.2rem;padding-bottom:.9rem}
+
+      /* ---- BOOKSHELF — horizontal scroll instead of overflow ---- */
+      .shelf-row-books{
+        overflow-x:auto;
+        overflow-y:visible;
+        -webkit-overflow-scrolling:touch;
+        scroll-snap-type:x mandatory;
+        padding:1rem .9rem 0;
+        gap:.65rem;
+      }
+      .book-card{
+        width:82px;
+        flex-shrink:0;
+        scroll-snap-align:start;
+      }
+      .book-cover-wrap{width:82px;height:123px}
+
+      /* ---- MODAL — sheet from bottom on phones ---- */
+      .modal-overlay{
+        padding:0;
+        align-items:flex-end;
+      }
+      .modal-card{
+        max-width:100%;
+        max-height:92vh;
+        border-radius:var(--radius-lg) var(--radius-lg) 0 0;
+        animation:slideUp .3s var(--ease) both;
+      }
+      .modal-close{padding:.75rem .75rem 0}
+      .modal-body{padding:0 1rem 1.4rem}
+
+      /* Book detail grid → stacked */
       .bk-det-grid{grid-template-columns:1fr}
-      .det-cover{max-width:150px;margin:0 auto}
-      .modal-body{padding:0 1.1rem 1.4rem}
+      .det-cover{max-width:140px;margin:0 auto}
+      .det-title{font-size:var(--fs-xl)}
+      .det-meta-grid{grid-template-columns:1fr}
+      .det-action-row{flex-direction:column;align-items:stretch}
+      .btn-primary{margin-left:0;justify-content:center}
+
+      /* Author modal */
+      .am-header{flex-direction:column;align-items:center;text-align:center}
+      .am-books{grid-template-columns:repeat(auto-fill,minmax(80px,1fr))}
+
+      /* Events */
+      .events-filter-row{gap:.5rem}
+      .evt-type-wrap{min-width:0;flex:1}
       .event-card{grid-template-columns:auto 1fr}
       .event-map{display:none}
-      .contact-card{flex-direction:column;padding:1.4rem}
+      .event-info{padding:.85rem 1rem}
+      .event-title{font-size:var(--fs-base)}
+
+      /* About / stats */
+      .stats-row{grid-template-columns:1fr 1fr}
+      .about-masthead-logo img{max-width:160px;max-height:160px}
+
+      /* Team */
       .team-grid{grid-template-columns:1fr 1fr}
-      .book-card{width:90px}
-      .book-cover-wrap{width:90px;height:135px}
+
+      /* News posts side-by-side → single col */
+      .news-posts-row{grid-template-columns:1fr}
+      .news-fb-hero-frame iframe{min-height:500px}
+
+      /* Contact */
+      .contact-card{flex-direction:column;padding:1.2rem 1rem;gap:1rem}
+      .contact-icon-wrap{width:46px;height:46px}
+      .contact-icon-wrap svg{width:20px;height:20px}
+      .contacts-map-wrap iframe{height:220px}
+
+      /* Order steps already 1-col via 1100px rule — just reduce padding */
+      .order-step{padding:1.4rem 1rem}
     }
+
+    /* ---- 420 px ---- */
     @media(max-width:420px){
+      /* Hide search bar entirely, just keep filter + theme icons */
       .topbar-search{display:none}
+
+      /* Shrink brand text to one line only */
+      .topbar-center-name{font-size:.76rem}
+      .topbar-brand-sub{display:none}
+
+      /* Tightest padding */
+      .section-inner{padding:1rem .75rem}
+
+      /* Book cards a touch smaller */
+      .book-card{width:76px}
+      .book-cover-wrap{width:76px;height:114px}
+
+      /* Stats 1-col on tiny phones */
+      .stats-row{grid-template-columns:1fr 1fr}
+      .stat-item{padding:1.1rem .7rem}
+
+      /* Team 1-col */
+      .team-grid{grid-template-columns:1fr}
+
+      /* Events filter compact */
+      .events-filter-lbl{display:none}
+      .events-divider{display:none}
+
+      /* Genre tags: slightly smaller */
+      .genre-tag{font-size:.67rem;padding:.22rem .65rem}
+
+      /* Back-to-top closer to edge */
+      .back-to-top{bottom:1.2rem;right:1.2rem;width:38px;height:38px}
+
+      /* Order step numbers smaller */
+      .step-num{font-size:2.8rem}
     }
+
+    /* Slide-up animation for mobile modal sheet */
+    @keyframes slideUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
   </style>
 </head>
 <body>
