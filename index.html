@@ -102,7 +102,8 @@
     .topbar-burger svg{width:17px;height:17px;fill:currentColor}
     .topbar-brand{display:flex;align-items:center;gap:.55rem;flex-shrink:0;cursor:pointer}
     .topbar-logo{width:32px;height:32px;object-fit:contain;border-radius:4px}
-    .topbar-center{position:absolute;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:.55rem;cursor:pointer;text-decoration:none;pointer-events:auto}
+    .topbar-center{position:absolute;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:.55rem;cursor:pointer;text-decoration:none;pointer-events:none}
+    .topbar-center>*{pointer-events:auto}
     .topbar-center-name{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:var(--fs-md);color:var(--terra);line-height:1.1;white-space:nowrap}
     .topbar-logo-fallback{
       width:32px;height:32px;background:var(--terra-pale);border:1px solid var(--ash);
@@ -484,8 +485,27 @@
     @media(max-width:600px){
       /* Topbar */
       .topbar{padding:0 .75rem;gap:.5rem}
-      .topbar-search input{width:110px}
+      /* Hide search bar; show icon button instead */
+      .topbar-search{display:none}
+      #mobileSearchBtn{display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;padding:.35rem;color:var(--sepia)}
+      #mobileSearchBtn svg{width:20px;height:20px;fill:currentColor}
       .topbar-center-name{font-size:.82rem}
+
+      /* When mobile search is open, show the bar full-width below topbar */
+      .topbar-search.mobile-open{
+        display:flex;
+        position:fixed;
+        top:var(--topbar-h);
+        left:0;right:0;
+        z-index:10003;
+        background:var(--cream);
+        border-bottom:2px solid var(--gold);
+        border-radius:0;
+        padding:.5rem .75rem;
+        gap:.5rem;
+        box-shadow:0 4px 12px rgba(0,0,0,.12);
+      }
+      .topbar-search.mobile-open input{width:100%;flex:1}
 
       /* Search predictions — keep inside screen */
       .search-predictions{left:auto;right:-1px;min-width:260px}
@@ -570,10 +590,26 @@
       .order-step{padding:1.4rem 1rem}
     }
 
+    /* Mobile search toggle button — hidden on wider screens */
+    @media(min-width:601px){#mobileSearchBtn{display:none}}
+
     /* ---- 420 px ---- */
     @media(max-width:420px){
-      /* Hide search bar entirely, just keep filter + theme icons */
-      .topbar-search{display:none}
+      /* When mobile search is open, show the bar full-width below topbar */
+      .topbar-search.mobile-open{
+        display:flex;
+        position:fixed;
+        top:var(--topbar-h);
+        left:0;right:0;
+        z-index:10003;
+        background:var(--cream);
+        border-bottom:2px solid var(--gold);
+        border-radius:0;
+        padding:.5rem .75rem;
+        gap:.5rem;
+        box-shadow:0 4px 12px rgba(0,0,0,.12);
+      }
+      .topbar-search.mobile-open input{width:100%;flex:1}
 
       /* Shrink brand text to one line only */
       .topbar-center-name{font-size:.76rem}
@@ -669,6 +705,9 @@
       <div class="topbar-brand-sub">Publications, Inc.</div>
     </div>
   </a>
+  <button id="mobileSearchBtn" onclick="toggleMobileSearch()" aria-label="Search" title="Search">
+    <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+  </button>
   <div class="topbar-right">
     <div class="topbar-search" role="search">
       <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
@@ -1003,7 +1042,7 @@
   <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
 </button>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 'use strict';
 
 /* ── DATA ───────────────────────────────────────────────────── */
@@ -1302,6 +1341,13 @@ window.handleSearch=()=>{
 };
 window.closePreds=()=>{document.getElementById('searchPreds').style.display='none'};
 window.clearSearch=()=>{document.getElementById('searchInput').value='';document.getElementById('clearBtn').style.display='none';closePreds()};
+window.toggleMobileSearch=()=>{
+  const bar=document.querySelector('.topbar-search');
+  const isOpen=bar.classList.toggle('mobile-open');
+  document.getElementById('mobileSearchBtn').setAttribute('aria-expanded',isOpen);
+  if(isOpen){setTimeout(()=>document.getElementById('searchInput').focus(),50);}
+  else{closePreds();}
+};
 
   // Event type dropdown helpers
   window.toggleEvtTypeOpts=function(){
@@ -1324,7 +1370,14 @@ window.clearSearch=()=>{document.getElementById('searchInput').value='';document
     renderEvents();
   };
 
-document.addEventListener('click',e=>{if(!document.querySelector('.topbar-search').contains(e.target))closePreds()});
+document.addEventListener('click',e=>{
+  const bar=document.querySelector('.topbar-search');
+  const mBtn=document.getElementById('mobileSearchBtn');
+  if(!bar.contains(e.target)&&!(mBtn&&mBtn.contains(e.target))){
+    closePreds();
+    if(bar.classList.contains('mobile-open')){bar.classList.remove('mobile-open');if(mBtn)mBtn.setAttribute('aria-expanded','false');}
+  }
+});
 
 /* ── FILTERS ────────────────────────────────────────────────── */
 window.applyFilters=()=>{
@@ -1535,16 +1588,13 @@ window.addEventListener('scroll',handleScroll);
   }
   if(!document.getElementById('yearOpts').contains(e.target)&&e.target!==document.getElementById('yearBtn')){
     document.getElementById('yearOpts').classList.remove('show');
-    document.getElementById('yearBtn').setAttribute('aria-expanded','false');
+     document.getElementById('yearBtn').setAttribute('aria-expanded','false');
   }
-  const etOpts=document.getElementById('evtTypeOpts');
-  const etBtn=document.getElementById('evtTypeBtn');
-  if(etOpts&&etBtn&&!etOpts.contains(e.target)&&e.target!==etBtn){
-    etOpts.classList.remove('show');
-    etBtn.setAttribute('aria-expanded','false');
+  if(!document.getElementById('evtTypeOpts').contains(e.target)&&e.target!==document.getElementById('evtTypeBtn')){
+    document.getElementById('evtTypeOpts').classList.remove('show');
+    document.getElementById('evtTypeBtn').setAttribute('aria-expanded','false');
   }
 });
-
 })(); // end init
 </script>
 </body>
