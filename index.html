@@ -334,7 +334,8 @@
     }
     .btn-primary:hover{opacity:.9;transform:translateY(-1px);box-shadow:0 6px 20px rgba(184,136,44,.4)}
     .am-header{display:flex;align-items:flex-start;gap:1.4rem;margin-bottom:1.4rem}
-    .am-avatar{width:76px;height:76px;border-radius:50%;background:linear-gradient(135deg,var(--terra-pale),var(--gold-pale));border:2px solid var(--ash);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--terra);flex-shrink:0}
+    .am-avatar{width:76px;height:76px;border-radius:50%;background:linear-gradient(135deg,var(--terra-pale),var(--gold-pale));border:2px solid var(--ash);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--terra);flex-shrink:0;overflow:hidden}
+    .am-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
     .am-name{font-family:'Cormorant Garamond',serif;font-size:var(--fs-xl);font-weight:700;color:var(--ink)}
     .am-bio{font-style:italic;color:var(--sepia);margin-top:.3rem;font-size:var(--fs-sm)}
     .am-books{display:grid;grid-template-columns:repeat(auto-fill,minmax(95px,1fr));gap:.9rem}
@@ -361,7 +362,8 @@
     .team-card{background:var(--ivory);border:1px solid var(--ash);border-radius:var(--radius-md);padding:1.7rem 1.1rem 1.3rem;text-align:center;transition:box-shadow .2s,transform .2s;position:relative;overflow:hidden}
     .team-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad-amber)}
     .team-card:hover{box-shadow:var(--shadow-md);transform:translateY(-4px)}
-    .team-avatar{width:68px;height:68px;border-radius:50%;background:linear-gradient(135deg,var(--terra-pale),var(--gold-pale));border:2px solid var(--ash);display:flex;align-items:center;justify-content:center;margin:0 auto .9rem;font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:700;color:var(--terra)}
+    .team-avatar{width:68px;height:68px;border-radius:50%;background:linear-gradient(135deg,var(--terra-pale),var(--gold-pale));border:2px solid var(--ash);display:flex;align-items:center;justify-content:center;margin:0 auto .9rem;font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:700;color:var(--terra);overflow:hidden}
+    .team-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
     .team-name{font-family:'Cormorant Garamond',serif;font-size:var(--fs-md);font-weight:600;color:var(--ink);margin-bottom:.25rem}
     .team-role{font-size:var(--fs-xs);color:var(--sepia);letter-spacing:.07em}
 
@@ -369,6 +371,8 @@
     .author-grid{display:flex;flex-direction:column}
     .author-row{display:flex;align-items:center;justify-content:space-between;padding:.9rem 0;border-bottom:1px solid var(--ash-light);cursor:pointer;transition:all .15s;gap:1rem}
     .author-row:hover{background:var(--gold-pale);margin:0 -1rem;padding:.9rem 1rem;border-radius:var(--radius-sm)}
+    .author-row-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--terra-pale),var(--gold-pale));border:1.5px solid var(--ash);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;color:var(--terra);flex-shrink:0;overflow:hidden}
+    .author-row-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
     .author-row-name{font-family:'Cormorant Garamond',serif;font-size:var(--fs-md);font-weight:600;color:var(--ink)}
     .author-row-bio{font-size:var(--fs-sm);color:var(--sepia);font-style:italic}
     .author-row-count{font-size:var(--fs-xs);color:var(--sepia);white-space:nowrap;flex-shrink:0}
@@ -795,7 +799,7 @@
         </div>
         <div class="stats-row">
           <div class="stat-item"><div class="stat-num">44+</div><div class="stat-lbl">Titles Published</div></div>
-          <div class="stat-item"><div class="stat-num">14</div><div class="stat-lbl">Santelmo Issues</div></div>
+          <div class="stat-item"><div class="stat-num">13</div><div class="stat-lbl">Santelmo Issues</div></div>
           <div class="stat-item"><div class="stat-num">2022</div><div class="stat-lbl">Founded</div></div>
           <div class="stat-item"><div class="stat-num">2</div><div class="stat-lbl">National Artists Featured</div></div>
         </div>
@@ -806,7 +810,7 @@
         </div>
         <div class="about-section">
           <h2 class="about-sec-heading">Santelmo: Liwanag sa Dilim</h2>
-          <p><em>Santelmo</em> is San Anselmo's flagship literary magazine, released multiple times a year. Each issue is thematically curated — spanning poetry, fiction, essays, visual art, and political commentary — and features a constellation of established and emerging Filipino voices. Now in its 14th issue, Santelmo has become an indispensable record of contemporary Philippine literary culture.</p>
+          <p><em>Santelmo</em> is San Anselmo's flagship literary magazine, released multiple times a year. Each issue is thematically curated — spanning poetry, fiction, essays, visual art, and political commentary — and features a constellation of established and emerging Filipino voices. Now in its 13th issue, Santelmo has become an indispensable record of contemporary Philippine literary culture.</p>
         </div>
       </div>
     </section>
@@ -1167,7 +1171,7 @@ const TEAM = [
   {name:"Marx Kristian Segundo",          role:"Book Designer"},
   {name:"Roxan Piaje",                    role:"Marketing Assistant"},
   {name:"Reymond Sambrano",               role:"Marketing Assistant, Web Developer"},
-  {name:"Edzel Frince Bual",              role:"Marketing Assistant, Web Developer", img: "edz 1x1.png"}
+  {name:"Edzel Frince Bual",              role:"Marketing Assistant, Web Developer"}
 ];
 
 const EVENTS = [
@@ -1300,7 +1304,7 @@ window.viewAuthor=(name)=>{
   const a=AUTHORS.find(x=>x.name===name); if(!a) return;
   const key=a.name.split(',')[0].split('(')[0].trim();
   const books=BOOKS.filter(b=>(b.author&&b.author.includes(key))||(b.editor&&b.editor.includes(key)));
-  document.getElementById('amAvatar').textContent=initials(a.name);
+  document.getElementById('amAvatar').innerHTML=a.img?`<img src="${a.img}" alt="${a.name}" onerror="this.parentElement.textContent='${initials(a.name)}'">`:initials(a.name);
   document.getElementById('amName').textContent=a.name;
   document.getElementById('amBio').textContent=a.bio;
   document.getElementById('amBooks').innerHTML=books.length
@@ -1555,7 +1559,7 @@ window.addEventListener('scroll',handleScroll);
   // Team
   document.getElementById('teamGrid').innerHTML=TEAM.map(t=>`
     <div class="team-card" role="listitem">
-      <div class="team-avatar" aria-hidden="true">${initials(t.name)}</div>
+      <div class="team-avatar" aria-hidden="true">${t.img?`<img src="${t.img}" alt="${t.name}" onerror="this.parentElement.textContent='${initials(t.name)}'">`:initials(t.name)}</div>
       <div class="team-name">${t.name}</div>
       <div class="team-role">${t.role}</div>
     </div>`).join('');
@@ -1565,7 +1569,10 @@ window.addEventListener('scroll',handleScroll);
     const key=a.name.split(',')[0].split('(')[0].trim();
     const cnt=BOOKS.filter(b=>(b.author&&b.author.includes(key))||(b.editor&&b.editor.includes(key))).length;
     return `<div class="author-row" role="listitem" onclick="viewAuthor('${a.name}')" tabindex="0" onkeydown="if(event.key==='Enter')viewAuthor('${a.name}')">
-      <div><div class="author-row-name">${a.name}</div><div class="author-row-bio">${a.bio}</div></div>
+      <div style="display:flex;align-items:center;gap:.85rem;min-width:0">
+        <div class="author-row-avatar">${a.img?`<img src="${a.img}" alt="${a.name}" onerror="this.parentElement.textContent='${initials(a.name)}'">`:initials(a.name)}</div>
+        <div style="min-width:0"><div class="author-row-name">${a.name}</div><div class="author-row-bio">${a.bio}</div></div>
+      </div>
       <div style="display:flex;align-items:center;gap:.7rem;flex-shrink:0">
         ${cnt?`<div class="author-row-count">${cnt} title${cnt!==1?'s':''}</div>`:''}
         <svg class="author-row-arrow" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
@@ -1599,5 +1606,3 @@ window.addEventListener('scroll',handleScroll);
 </script>
 </body>
 </html>
-
-
